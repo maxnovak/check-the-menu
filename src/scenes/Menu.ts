@@ -2,6 +2,7 @@ import { Container, Graphics, Text } from "pixi.js";
 import { IScene } from "./types";
 import { Manager } from "../Manager";
 import { List } from "@pixi/ui";
+import { GameScene } from "./Game";
 
 export class MenuScene extends Container implements IScene {
     constructor() {
@@ -24,6 +25,11 @@ export class MenuScene extends Container implements IScene {
         });
         levelOneSelect.anchor.x = 0.5;
         levelOneSelect.anchor.y = 0.5;
+        levelOneSelect.eventMode = "static";
+        levelOneSelect.onclick = () => {
+            Manager.closeMenu();
+            Manager.changeScene(new GameScene());
+        };
 
         menuContainer.addChild(menuBox);
         const list = new List({
