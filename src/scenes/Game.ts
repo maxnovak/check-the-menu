@@ -33,6 +33,7 @@ export class GameScene extends Container implements IScene {
 			fontWeight: "bold",
 			fontFamily: "Georgia, serif",
 		});
+        this.stepsText.y = 36;
         this.addChild(this.stepsText);
     }
 
