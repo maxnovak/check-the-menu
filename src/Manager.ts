@@ -9,6 +9,7 @@ export class Manager {
     private static _height: number;
     private static menu: Text;
     public static playerSprites: Spritesheet;
+    public static levelColor: number;
 
     public static get width(): number {
         return Manager._width;
@@ -20,6 +21,7 @@ export class Manager {
     public static initialize(width: number, height: number, background: number): void {
         Manager._width = width;
         Manager._height = height;
+        Manager.levelColor = background;
 
         Manager.app = new Application({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -38,7 +40,7 @@ export class Manager {
         Manager.menu.eventMode = 'static';
         Manager.menu.on('pointerdown', () => {
             Manager.loadMenu();
-        })
+        });
 
         Manager.app.stage.addChild(Manager.menu);
         Manager.app.ticker.add(Manager.update)
@@ -51,6 +53,7 @@ export class Manager {
         }
 
         Manager.currentScene = newScene;
+        Manager.app.renderer.background.color = Manager.levelColor;
         Manager.app.stage.addChild(Manager.currentScene);
     }
 
