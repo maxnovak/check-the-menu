@@ -8,6 +8,7 @@ export class GameScene extends Container implements IScene {
     private playerVelocityX: number;
     private playerVelocityY: number;
     private numberOfSteps: number;
+    private isRunning: boolean;
 
     constructor() {
         super();
@@ -15,6 +16,7 @@ export class GameScene extends Container implements IScene {
         this.player = new AnimatedSprite(Manager.playerSprites.animations.playerIdle);
         this.player.animationSpeed = 0.1666;
         this.player.play();
+        this.isRunning = false;
 
         this.player.anchor.set(0.5);
         this.player.x = Manager.width / 2;
@@ -52,6 +54,11 @@ export class GameScene extends Container implements IScene {
             this.player.scale.x = -1;
             this.playerVelocityX = -5;
         }
+        if ((this.playerVelocityX != 0 || this.playerVelocityY != 0) && !this.isRunning) {
+            this.isRunning = true;
+            this.player.textures = Manager.playerSprites.animations.playerRun;
+            this.player.play();
+        }
     }
     
     private onKeyUp(e: KeyboardEvent): void {
@@ -66,6 +73,11 @@ export class GameScene extends Container implements IScene {
         }
         if (e.key === "a" || e.key === "ArrowLeft") {
             this.playerVelocityX = 0;
+        }
+        if (this.playerVelocityX == 0 && this.playerVelocityY == 0 && this.isRunning) {
+            this.isRunning = false;
+            this.player.textures = Manager.playerSprites.animations.playerIdle;
+            this.player.play();
         }
     }
 
