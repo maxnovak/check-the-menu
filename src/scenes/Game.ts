@@ -2,6 +2,9 @@ import { AnimatedSprite, Container, Text } from "pixi.js";
 import { Manager } from "../Manager";
 import { IScene } from "./types";
 
+const PLAYER_X_BUFFER = 8;
+const PLAYER_Y_BUFFER = 12;
+
 export class GameScene extends Container implements IScene {
     private player: AnimatedSprite;
     private stepsText: Text;
@@ -93,8 +96,14 @@ export class GameScene extends Container implements IScene {
     }
 
     public update(framesPassed: number): void {
-        this.player.x += this.playerVelocityX * framesPassed;
-        this.player.y += this.playerVelocityY * framesPassed;
+        const newLocationX = this.player.x + this.playerVelocityX * framesPassed
+        if (newLocationX >= PLAYER_X_BUFFER && newLocationX <= Manager.width - PLAYER_X_BUFFER) {
+            this.player.x += this.playerVelocityX * framesPassed;
+        }
+        const newLocationY = this.player.y + this.playerVelocityY * framesPassed
+        if (newLocationY >= PLAYER_Y_BUFFER && newLocationY <= Manager.height - PLAYER_Y_BUFFER) {
+            this.player.y += this.playerVelocityY * framesPassed;
+        }
         if (this.playerVelocityX != 0 || this.playerVelocityY != 0) {
             this.numberOfSteps += Math.round(framesPassed);
         }
