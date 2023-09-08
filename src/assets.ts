@@ -108,7 +108,7 @@ export const CharacterSprites = {
     meta: {
 		image: './characterSprites.png',
 		format: 'RGBA8888',
-		size: { w: 480, h: 48 },
+		size: { w: 480, h: 96 },
 		scale: '1'
 	},
 	animations: {
