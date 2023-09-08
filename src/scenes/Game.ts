@@ -42,12 +42,14 @@ export class GameScene extends Container implements IScene {
             this.playerVelocityY = -5;
         }
         if (e.key === "d" || e.key === "ArrowRight") {
+            this.player.scale.x = 1;
             this.playerVelocityX = 5;
         }
         if (e.key === "s" || e.key === "ArrowDown") {
             this.playerVelocityY = 5;
         }
         if (e.key === "a" || e.key === "ArrowLeft") {
+            this.player.scale.x = -1;
             this.playerVelocityX = -5;
         }
     }
