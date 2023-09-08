@@ -40,6 +40,17 @@ export class GameScene extends Container implements IScene {
     }
 
     private onKeyDown(e: KeyboardEvent): void {
+        if (Manager.menuOpen) {
+            this.playerVelocityY = 0;
+            this.playerVelocityX = 0;
+            if (this.isRunning) {
+                this.isRunning = false;
+                this.player.textures = Manager.playerSprites.animations.playerIdle;
+                this.player.play();
+            }
+
+            return;
+        }
         if (e.key === "w" || e.key === "ArrowUp") {
             this.playerVelocityY = -5;
         }

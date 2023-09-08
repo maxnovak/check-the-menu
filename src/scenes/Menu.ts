@@ -15,24 +15,28 @@ export class MenuScene extends Container implements IScene {
         const menuText = this.makeMenuItem("Main Menu", 36);
         const levelOneSelect = this.makeMenuItem("Level One", 24, () => {
             Manager.closeMenu();
+            Manager.menuOpen = false;
             Manager.levelColor = 0x721422;
             Manager.changeScene(new GameScene());
         });
 
         const levelTwoSelect = this.makeMenuItem("Level Two", 24, () => {
             Manager.closeMenu();
+            Manager.menuOpen = false;
             Manager.levelColor = 0x2D572C;
             Manager.changeScene(new GameScene());
         });
 
         const levelThreeSelect = this.makeMenuItem("Level Three", 24, () => {
             Manager.closeMenu();
+            Manager.menuOpen = false;
             Manager.levelColor = 0xF54021;
             Manager.changeScene(new GameScene());
         });
 
         const resume = this.makeMenuItem("Resume", 28, () => {
             Manager.closeMenu();
+            Manager.menuOpen = false;
         });
 
         const space = this.makeMenuItem("", 10);
@@ -59,6 +63,7 @@ export class MenuScene extends Container implements IScene {
     private onKeyDown(e: KeyboardEvent): void {
         if (e.key === "Escape") {
             Manager.closeMenu();
+            Manager.menuOpen = false;
         }
     }
 

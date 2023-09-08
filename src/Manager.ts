@@ -10,6 +10,7 @@ export class Manager {
     private static menu: Text;
     public static playerSprites: Spritesheet;
     public static levelColor: number;
+    public static menuOpen: boolean;
 
     public static get width(): number {
         return Manager._width;
@@ -22,6 +23,7 @@ export class Manager {
         Manager._width = width;
         Manager._height = height;
         Manager.levelColor = background;
+        Manager.menuOpen = false;
 
         Manager.app = new Application({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -58,6 +60,7 @@ export class Manager {
     }
 
     public static loadMenu(): void {
+        Manager.menuOpen = true;
         Manager.menu.eventMode = 'none';
         Manager.app.stage.addChild(new MenuScene());
     }
