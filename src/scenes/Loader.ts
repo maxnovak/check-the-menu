@@ -40,11 +40,11 @@ export class LoaderScene extends Container implements IScene {
         await Assets.init({ manifest: manifest });
 
         const bundleIds =  manifest.bundles.map(bundle => bundle.name);
+        await Assets.loadBundle(bundleIds, this.downloadProgress.bind(this));
+
         const playerSprites = new Spritesheet(BaseTexture.from(CharacterSprites.meta.image), CharacterSprites)
         await playerSprites.parse();
         Manager.playerSprites = playerSprites;
-
-        await Assets.loadBundle(bundleIds, this.downloadProgress.bind(this));
     }
 
     private downloadProgress(progressRatio: number): void {
