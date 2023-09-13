@@ -18,6 +18,9 @@ export class Manager {
     public static get height(): number {
         return Manager._height;
     }
+    public static set menuText(text: string) {
+        Manager.menu.text = text;
+    }
 
     public static initialize(width: number, height: number, background: number): void {
         Manager._width = width;
@@ -34,7 +37,7 @@ export class Manager {
             height: height
         });
 
-        Manager.menu = new Text("Menu", {
+        Manager.menu = new Text("", {
             fontSize: 36,
 			fontWeight: "bold",
 			fontFamily: "Georgia, serif",
